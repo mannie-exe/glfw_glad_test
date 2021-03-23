@@ -9,26 +9,36 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 
 
 
+set(GLAD_DIR ${CMAKE_SOURCE_DIR}/lib/glad)
+set(GLAD_SOURCE_DIR ${GLAD_DIR}/src)
+set(GLAD_INCLUDE_DIR ${GLAD_DIR}/include)
+
+add_executable(${PROJECT_NAME}
+               ${GLAD_SOURCE_DIR}/gl.c
+               ./src/main.c)
+target_include_directories(${PROJECT_NAME} PRIVATE
+                           ${GLAD_INCLUDE_DIR}
+                           ${CMAKE_SOURCE_DIR}/include)
+
+
+
 FetchContent_Declare(
   glfw
   GIT_REPOSITORY https://github.com/glfw/glfw.git
   GIT_TAG        3.3.3
 )
-
-set(GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
-set(GLFW_INSTALL        OFF CACHE BOOL "" FORCE)
-set(BUILD_SHARED_LIBS   ON  CACHE BOOL "" FORCE)
-
+set(GLFW_BUILD_DOCS     OFF CACHE BOOL "Build the GLFW documentation"     FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs"  FORCE)
+set(GLFW_BUILD_TESTS    OFF CACHE BOOL "Build the GLFW test programs"     FORCE)
+set(GLFW_INSTALL        OFF CACHE BOOL "Generate installation target"     FORCE)
+set(BUILD_SHARED_LIBS   ON  CACHE BOOL "Build shared libraries"           FORCE)
 FetchContent_MakeAvailable(glfw)
-
-
-
-add_executable(${PROJECT_NAME} ./src/main.c)
-target_include_directories(${PROJECT_NAME} PRIVATE ${glfw_SOURCE_DIR}/include)
-target_link_directories(${PROJECT_NAME} PRIVATE ${glfw_BINARY_DIR}/src)
-target_link_libraries(${PROJECT_NAME} PRIVATE glfw3dll)
+target_include_directories(${PROJECT_NAME} PRIVATE
+                           ${glfw_SOURCE_DIR}/include)
+target_link_directories(${PROJECT_NAME} PRIVATE
+                        ${glfw_BINARY_DIR}/src)
+target_compile_definitions(${PROJECT_NAME} PRIVATE "GLFW_INCLUDE_NONE")
+target_link_libraries(${PROJECT_NAME} glfw3dll)
 
 
 
@@ -72,4 +82,4 @@ macro(print_all)
   endif()
 endmacro()
 
-# print_all(VARIABLES DIRECTORY)
+# print_all(VARIABLES TARGET glad)
