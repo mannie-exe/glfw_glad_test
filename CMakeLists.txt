@@ -9,16 +9,21 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 
 
 
+FetchContent_Declare(
+  mathc
+  GIT_REPOSITORY  https://github.com/felselva/mathc.git
+  GIT_TAG         v2019.02.16.0
+)
+FetchContent_GetProperties(mathc)
+if (NOT mathc_POPULATED)
+  FetchContent_Populate(mathc)
+endif()
+
+
+
 set(GLAD_DIR ${CMAKE_SOURCE_DIR}/lib/glad)
 set(GLAD_SOURCE_DIR ${GLAD_DIR}/src)
 set(GLAD_INCLUDE_DIR ${GLAD_DIR}/include)
-
-add_executable(${PROJECT_NAME}
-               ${GLAD_SOURCE_DIR}/gl.c
-               ./src/main.c)
-target_include_directories(${PROJECT_NAME} PRIVATE
-                           ${GLAD_INCLUDE_DIR}
-                           ${CMAKE_SOURCE_DIR}/include)
 
 
 
@@ -33,10 +38,23 @@ set(GLFW_BUILD_TESTS    OFF CACHE BOOL "Build the GLFW test programs"     FORCE)
 set(GLFW_INSTALL        OFF CACHE BOOL "Generate installation target"     FORCE)
 set(BUILD_SHARED_LIBS   ON  CACHE BOOL "Build shared libraries"           FORCE)
 FetchContent_MakeAvailable(glfw)
-target_include_directories(${PROJECT_NAME} PRIVATE
-                           ${glfw_SOURCE_DIR}/include)
-target_link_directories(${PROJECT_NAME} PRIVATE
-                        ${glfw_BINARY_DIR}/src)
+
+
+
+add_executable(
+  ${PROJECT_NAME}
+  ${mathc_SOURCE_DIR}/mathc.c
+  ${GLAD_SOURCE_DIR}/gl.c
+  ./src/main.c)
+target_include_directories(
+  ${PROJECT_NAME} PRIVATE
+  ${mathc_SOURCE_DIR}
+  ${GLAD_INCLUDE_DIR}
+  ${glfw_SOURCE_DIR}/include
+  ${CMAKE_SOURCE_DIR}/include)
+target_link_directories(
+  ${PROJECT_NAME} PRIVATE
+  ${glfw_BINARY_DIR}/src)
 target_compile_definitions(${PROJECT_NAME} PRIVATE "GLFW_INCLUDE_NONE")
 target_link_libraries(${PROJECT_NAME} glfw3dll)
 
@@ -82,4 +100,4 @@ macro(print_all)
   endif()
 endmacro()
 
-# print_all(VARIABLES TARGET glad)
+# print_all(VARIABLES DIRECTORY)
