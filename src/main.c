@@ -15,8 +15,8 @@ void key_callback(GLFWwindow *window,
 {
     /**
      * action:
-     *  0: release
-     *  1: down
+     *  0: release  (UP)
+     *  1: press    (DOWN)
      *  2: hold
      **/
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -34,6 +34,7 @@ void init_main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
     /**
      * if (mac)
      * {
