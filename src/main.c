@@ -3,10 +3,10 @@
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 
-const int WIDTH = 1920;
-const int HEIGHT = 1080;
 int glVersion = 0;
 
+const int INITIAL_WIDTH = 1920;
+const int INITIAL_HEIGHT = 1080;
 GLFWwindow *mainWindow = NULL;
 
 void key_callback(GLFWwindow *window,
@@ -42,11 +42,13 @@ void init_main()
      *
     **/
 
-    mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "GLFW -> GLAD (OpenGL in C)", NULL, NULL);
+    mainWindow = glfwCreateWindow(INITIAL_WIDTH, INITIAL_HEIGHT,
+                                  "GLFW -> GLAD (OpenGL in C)",
+                                  NULL, NULL);
     if (mainWindow == NULL)
     {
         printf("Failed to create window using GLFW\n");
-        glfwTerminate();
+        close_Main();
         abort();
     }
     glfwMakeContextCurrent(mainWindow);
@@ -55,7 +57,7 @@ void init_main()
     if (glVersion == 0)
     {
         printf("Failed to get OpenGL context\n");
-        glfwTerminate();
+        close_Main();
         abort();
     }
     printf("Loaded OpenGL v%d.%d\n",
