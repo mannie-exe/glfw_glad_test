@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <tinyobj_loader_c.h>
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 
@@ -85,10 +86,13 @@ void draw_main()
         glfwPollEvents();
         glClearColor(0.27f, 0.87f, 0.75f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         glUseProgram(shaderProgram_triangle);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_triangle);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         glfwSwapBuffers(mainWindow);
     }

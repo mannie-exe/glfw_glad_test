@@ -21,6 +21,18 @@ endif()
 
 
 
+FetchContent_Declare(
+  tinyobjloader
+  GIT_REPOSITORY  https://github.com/syoyo/tinyobjloader-c.git
+  GIT_TAG         master
+)
+FetchContent_GetProperties(tinyobjloader)
+if (NOT tinyobjloader_POPULATED)
+  FetchContent_Populate(tinyobjloader)
+endif()
+
+
+
 set(GLAD_DIR ${CMAKE_SOURCE_DIR}/lib/glad)
 set(GLAD_SOURCE_DIR ${GLAD_DIR}/src)
 set(GLAD_INCLUDE_DIR ${GLAD_DIR}/include)
@@ -49,6 +61,7 @@ add_executable(
 target_include_directories(
   ${PROJECT_NAME} PRIVATE
   ${mathc_SOURCE_DIR}
+  ${tinyobjloader_SOURCE_DIR}
   ${GLAD_INCLUDE_DIR}
   ${glfw_SOURCE_DIR}/include
   ${CMAKE_SOURCE_DIR}/include)
