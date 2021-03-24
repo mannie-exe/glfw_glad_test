@@ -87,7 +87,7 @@ void draw_main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shaderProgram_triangle);
-        glBindVertexArray(ebo_triangle);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_triangle);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(mainWindow);
