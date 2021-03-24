@@ -1,3 +1,5 @@
+#define TINYOBJ_LOADER_C_IMPLEMENTATION
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <tinyobj_loader_c.h>
