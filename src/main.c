@@ -6,6 +6,8 @@
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 
+#include "file.h"
+
 int glVersion = 0;
 
 const int INITIAL_WIDTH = 1920;
@@ -239,6 +241,7 @@ void init_triangle()
 
 int main()
 {
+    printf(read_file("file_path\n"));
     init_main();
     init_triangle();
 
