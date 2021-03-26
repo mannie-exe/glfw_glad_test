@@ -1,10 +1,13 @@
-#define TINYOBJ_LOADER_C_IMPLEMENTATION
-
 #include <stdlib.h>
 #include <stdio.h>
-#include <tinyobj_loader_c.h>
-#include <GLFW/glfw3.h>
-#include <glad/gl.h>
+
+#define CVECTOR_LOGARITHMIC_GROWTH
+#define TINYOBJ_LOADER_C_IMPLEMENTATION
+
+#include "cvector.h"
+#include "tinyobj_loader_c.h"
+#include "GLFW/glfw3.h"
+#include "glad/gl.h"
 
 #include "file.h"
 

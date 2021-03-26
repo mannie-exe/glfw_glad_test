@@ -8,6 +8,7 @@ project(glfw_glad_test VERSION 0.1 LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
+include("cmake/c-vector.cmake")
 include("cmake/mathc.cmake")
 include("cmake/tinyobjloader-c.cmake")
 include("cmake/glad.cmake")
