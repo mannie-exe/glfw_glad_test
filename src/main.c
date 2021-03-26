@@ -23,9 +23,9 @@ void callback_key(GLFWwindow *window,
 {
     /**
      * action:
-     *  0: release  (UP)
-     *  1: press    (DOWN)
-     *  2: hold
+     *  0: release  GLFW_RELEASE
+     *  1: press    GLFW_PRESS
+     *  2: hold     GLFW_REPEAT
      **/
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
