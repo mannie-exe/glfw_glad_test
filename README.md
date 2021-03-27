@@ -6,6 +6,13 @@
 - Python
   - in path
   - both version 3 and 2 work
+- xxd
+  - in path
+  - included in GCC
+    - Windows users can get it through:
+      - VIM
+      - Git (which includes VIM, and xxd)
+      - search "xxd.exe" on PC to find where it is
 - Ninja
   - add to path
   - optional, but recommended
@@ -20,7 +27,3 @@
 - currently untested on Linux
   - should work with a compiler of choice
   - if not, please report
-- xxd
-  - in path
-  - included in gcc (build-essentials)
-  - (a copy is included for Windows users)
