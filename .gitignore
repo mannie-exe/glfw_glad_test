@@ -208,4 +208,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/cmake,windows,linux,macos,vscode,vim,emacs,sublimetext,notepadpp
 
 
+include/shaders_*
 build

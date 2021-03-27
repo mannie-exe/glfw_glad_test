@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-include("cmake/build_postfix.cmake")
+include("cmake/macros/get_build_postfix.cmake")
 include("cmake/macros/print_all.cmake")
 
 
@@ -16,11 +16,14 @@ include("cmake/glfw.cmake")
 
 list(APPEND
      ${PROJECT_NAME}_SRC_FILES
-     "./src/file/file.c"
-     "./src/main.c")
-list(APPEND ${PROJECT_NAME}_INC_DIRS "./include")
+     "src/file/file.c"
+     "src/main.c")
+list(APPEND ${PROJECT_NAME}_INC_DIRS "include")
 list(APPEND ${PROJECT_NAME}_LNK_DIRS
      ${PROJECT_BINARY_DIR})
+
+file(GLOB_RECURSE
+     ${PROJECT_NAME}_GLSL_FILES "src/shaders/**.glsl")
 
 # print_all(VARIABLES DIRECTORY)
 
@@ -35,4 +38,5 @@ target_link_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
                       ${${PROJECT_NAME}_LNK_LIBS})
 
+include("cmake/pre_build.cmake")
 include("cmake/post_build.cmake")
