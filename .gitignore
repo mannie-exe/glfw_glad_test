@@ -209,4 +209,5 @@ $RECYCLE.BIN/
 
 
 include/shaders_*
+include/images_*
 build

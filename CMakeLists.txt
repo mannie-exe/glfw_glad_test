@@ -24,6 +24,19 @@ list(APPEND ${PROJECT_NAME}_LNK_DIRS
 file(GLOB_RECURSE
      ${PROJECT_NAME}_GLSL_FILES "src/shaders/**.glsl")
 
+# file(GLOB_RECURSE
+#      ${PROJECT_NAME}_IMAGE_FILES_BUFF "src/images/**.jpg")
+# list(APPEND ${PROJECT_NAME}_IMAGE_FILES
+#      ${${PROJECT_NAME}_IMAGE_FILES_BUFF})
+# file(GLOB_RECURSE
+#      ${PROJECT_NAME}_IMAGE_FILES_BUFF "src/images/**.jpeg")
+# list(APPEND ${PROJECT_NAME}_IMAGE_FILES
+#      ${${PROJECT_NAME}_IMAGE_FILES_BUFF})
+# file(GLOB_RECURSE
+#      ${PROJECT_NAME}_IMAGE_FILES_BUFF "src/images/**.png")
+# list(APPEND ${PROJECT_NAME}_IMAGE_FILES
+#      ${${PROJECT_NAME}_IMAGE_FILES_BUFF})
+
 # print_all(VARIABLES DIRECTORY)
 
 add_executable(${PROJECT_NAME}
