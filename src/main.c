@@ -91,15 +91,16 @@ void draw_main()
     while (!glfwWindowShouldClose(mainWindow))
     {
         glfwPollEvents();
-        glClearColor(0.27f, 0.87f, 0.75f, 1.0f);
+        // glClearColor(0.27f, 0.87f, 0.75f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         glUseProgram(shaderProgram_triangle);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_triangle);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         glfwSwapBuffers(mainWindow);
     }
@@ -193,10 +194,10 @@ void init_triangle()
     glGenBuffers(1, &eboTriangle);
 
     float vertices[] = {
-        0.5f, 0.5f, 0.0f,   // top right
-        0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f, // bottom left
-        -0.5f, 0.5f, 0.0f   // top left
+        00.5f, 00.5f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+        00.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, // bottom left
+        -0.5f, 00.5f, 0.0f, 0.0f, 0.0f, 0.0f  // top left
     };
     unsigned int indices[] = {
         0, 1, 3, // first triangle
@@ -205,17 +206,23 @@ void init_triangle()
 
     const char *gl_vertexSource = ("#version 460 core\n"
                                    "layout (location = 0) in vec3 aPos;\n"
+                                   "layout (location = 1) in vec3 aColor;\n"
+                                   "\n"
+                                   "out vec3 vertexColor;"
                                    "\n"
                                    "void main()\n"
                                    "{\n"
-                                   "    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
+                                   "    gl_Position = vec4(aPos, 1.0);\n"
+                                   "    vertexColor = aColor;"
                                    "}\n");
     const char *gl_fragmentSource = ("#version 460 core\n"
+                                     "\n"
+                                     "in vec3 vertexColor;\n"
                                      "out vec4 FragColor;\n"
                                      "\n"
                                      "void main()\n"
                                      "{\n"
-                                     "    FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0);\n"
+                                     "    FragColor = vec4(vertexColor, 1.0);\n"
                                      "}\n");
 
     glBindVertexArray(vaoTriangle);
@@ -231,8 +238,11 @@ void init_triangle()
                  GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
-                          3 * sizeof(float), (void *)0);
+                          6 * sizeof(float), (void *)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
+                          6 * sizeof(float), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
 
     unsigned int gl_shaderProgramIndex;
     gl_shaderProgramIndex = init_gl_shaderProgram(gl_vertexSource,
