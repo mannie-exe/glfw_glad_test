@@ -47,13 +47,9 @@ void init_main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-    /**
-     * if (mac)
-     * {
-     *      glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-     * }
-     *
-    **/
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
 
     mainWindow = glfwCreateWindow(INITIAL_WIDTH, INITIAL_HEIGHT,
                                   "GLFW -> GLAD (OpenGL in C)",
