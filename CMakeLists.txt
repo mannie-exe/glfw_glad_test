@@ -16,7 +16,6 @@ include("cmake/glfw.cmake")
 
 list(APPEND
      ${PROJECT_NAME}_SRC_FILES
-     "src/file/file.c"
      "src/main.c")
 list(APPEND ${PROJECT_NAME}_INC_DIRS "include")
 list(APPEND ${PROJECT_NAME}_LNK_DIRS
