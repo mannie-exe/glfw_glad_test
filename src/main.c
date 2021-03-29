@@ -9,6 +9,8 @@
 #include "GLFW/glfw3.h"
 #include "glad/gl.h"
 
+#include "shader_fragment_glsl.h"
+
 #define INITIAL_WIDTH 1920
 #define INITIAL_HEIGHT 1080
 

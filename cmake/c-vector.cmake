@@ -8,7 +8,8 @@ get_down("c_vector"
          "origin/master"
          ON)
 
-set(c_vector_INC_DIRS ${c_vector_SOURCE_DIR})
+cmake_path(SET c_vector_INC_DIRS NORMALIZE
+           ${c_vector_SOURCE_DIR})
 set(c_vector_LNK_LIBS "c-vector")
 
 list(APPEND

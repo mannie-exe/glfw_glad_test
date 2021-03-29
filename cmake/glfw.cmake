@@ -23,12 +23,14 @@ get_down("glfw"
          "3.3.3"
          ON)
 
-set(glfw_INC_DIRS "${glfw_SOURCE_DIR}/include")
+cmake_path(SET glfw_INC_DIRS NORMALIZE
+           "${glfw_SOURCE_DIR}/include")
 set(glfw_CMPL_DEFS "GLFW_INCLUDE_NONE")
-set(glfw_LNK_DIRS
-    "${glfw_BINARY_DIR}/${BUILD_POSTFIX}/src")
+cmake_path(SET glfw_LNK_DIRS NORMALIZE
+           "${glfw_BINARY_DIR}/${BUILD_POSTFIX}/src")
 set(glfw_LNK_LIBS "glfw3dll")
-set(glfw_ARTIFACTS "${glfw_LNK_DIRS}/glfw3.dll")
+cmake_path(SET glfw_ARTIFACTS NORMALIZE
+           "${glfw_LNK_DIRS}/glfw3.dll")
 
 list(APPEND
      ${PROJECT_NAME}_INC_DIRS ${glfw_INC_DIRS})
@@ -39,4 +41,4 @@ list(APPEND
 list(APPEND
      ${PROJECT_NAME}_LNK_LIBS ${glfw_LNK_LIBS})
 list(APPEND
-     ${PROJECT_NAME}_CPY_ARTIFACTS ${glfw_ARTIFACTS})
+     ${PROJECT_NAME}_ARTIFACTS ${glfw_ARTIFACTS})

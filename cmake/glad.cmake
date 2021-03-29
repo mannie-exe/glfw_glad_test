@@ -4,8 +4,10 @@ include_guard()
 
 set(glad_DIR "${CMAKE_SOURCE_DIR}/lib/glad")
 
-set(glad_SRC_FILES "${glad_DIR}/src/gl.c")
-set(glad_INC_DIRS "${glad_DIR}/include")
+cmake_path(SET glad_SRC_FILES NORMALIZE
+           "${glad_DIR}/src/gl.c")
+cmake_path(SET glad_INC_DIRS NORMALIZE
+           "${glad_DIR}/include")
 
 list(APPEND
      ${PROJECT_NAME}_SRC_FILES ${glad_SRC_FILES})
