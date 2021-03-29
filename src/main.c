@@ -9,6 +9,7 @@
 #include "GLFW/glfw3.h"
 #include "glad/gl.h"
 
+#include "shader_vertex_glsl.h"
 #include "shader_fragment_glsl.h"
 
 #define INITIAL_WIDTH 1920
@@ -146,26 +147,8 @@ void init_triangle()
         1, 2, 3  // second triangle
     };
 
-    const char *gl_vertexSource = ("#version 460 core\n"
-                                   "layout (location = 0) in vec3 aPos;\n"
-                                   "layout (location = 1) in vec3 aColor;\n"
-                                   "\n"
-                                   "out vec3 vertexColor;"
-                                   "\n"
-                                   "void main()\n"
-                                   "{\n"
-                                   "    gl_Position = vec4(aPos, 1.0);\n"
-                                   "    vertexColor = aColor;"
-                                   "}\n");
-    const char *gl_fragmentSource = ("#version 460 core\n"
-                                     "\n"
-                                     "in vec3 vertexColor;\n"
-                                     "out vec4 FragColor;\n"
-                                     "\n"
-                                     "void main()\n"
-                                     "{\n"
-                                     "    FragColor = vec4(vertexColor, 1.0);\n"
-                                     "}\n");
+    extern unsigned char shader_vertex_glsl[];
+    extern unsigned char shader_fragment_glsl[];
 
     glBindVertexArray(vaoTriangle);
 
@@ -187,8 +170,9 @@ void init_triangle()
     glEnableVertexAttribArray(1);
 
     unsigned int gl_shaderProgramIndex;
-    gl_shaderProgramIndex = init_gl_shaderProgram(gl_vertexSource,
-                                                  gl_fragmentSource);
+    gl_shaderProgramIndex = init_gl_shaderProgram(
+        (char *)shader_vertex_glsl,
+        (char *)shader_fragment_glsl);
 
     ebo_triangle = eboTriangle;
     shaderProgram_triangle = gl_shaderProgramIndex;
